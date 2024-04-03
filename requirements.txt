@@ -1,0 +1,29 @@
+ipykernel
+ipython
+lightly
+lightly-utils
+lightning
+lightning-utilities
+multidict
+numpy
+opencv-python
+opt-einsum
+pandas
+Pillow
+protobuf<5
+pypng
+pyspng
+PyWavelets
+scikit-image
+scipy
+tensorboard
+tifffile
+torch
+torchvision
+tqdm
+typing_extensions
+videolib @ git+https://github.com/abhinaukumar/videolib@main
+tonemaplib @ git+https://github.com/abhinaukumar/tonemaplib@main
+qualitylib @ git+https://github.com/abhinaukumar/qualitylib@main
+wandb
+gdown
