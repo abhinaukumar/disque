@@ -1,7 +1,7 @@
 from typing import Tuple
 import torch
 from torch import nn
-from .norm import InstanceNorm
+from .norm import LayerNorm
 from .resnet import ResNetDownBlock
 
 class ContentEncoder(nn.Module):
@@ -15,7 +15,7 @@ class ContentEncoder(nn.Module):
 
         self.pre_filter = nn.Sequential(
             nn.Conv2d(3, 64, (7, 7), padding=(3, 3), bias=False),
-            InstanceNorm(64),
+            LayerNorm(64),
             nn.LeakyReLU(0.1, inplace=True)
         )
 
