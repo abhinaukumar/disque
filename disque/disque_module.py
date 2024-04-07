@@ -46,15 +46,15 @@ class DisQUEModule(pl.LightningModule):
 
         # Edit to set the paths to text files containing lists of SDR/HDR images
         image_list_paths = {
-            'sdr': 'sdr_image_list.txt',
-            'hdr': 'hdr_image_list.txt',
+            'sdr': None,
+            'hdr': None,
         }
 
         # Edit to set the paths of the image datasets.
         # Do not add a '/' at the end of the dataset dirs.
         image_list_base_dirs = {
-            'sdr': 'sdr_dataset',
-            'hdr': 'hdr_dataset',
+            'sdr': None,
+            'hdr': None,
         }
 
         DatasetClasses = {
@@ -68,8 +68,12 @@ class DisQUEModule(pl.LightningModule):
         self._train_step_loss = 0
         self.log_batches = args.log_batches
 
-        self.train_dataset = DatasetClasses[self.dataset](image_list_paths[self.dataset], base_dir=image_list_base_dirs[self.dataset], mode='train')
-        self.val_dataset = DatasetClasses[self.dataset](image_list_paths[self.dataset], base_dir=image_list_base_dirs[self.dataset], mode='val')
+        if image_list_paths[self.dataset] is not None and image_list_base_dirs[self.dataset] is not None:
+            self.train_dataset = DatasetClasses[self.dataset](image_list_paths[self.dataset], base_dir=image_list_base_dirs[self.dataset], mode='train')
+            self.val_dataset = DatasetClasses[self.dataset](image_list_paths[self.dataset], base_dir=image_list_base_dirs[self.dataset], mode='val')
+        else:
+            self.train_dataset = None
+            self.val_dataset = None
 
         self.save_hyperparameters()
 
