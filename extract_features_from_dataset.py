@@ -9,6 +9,7 @@ from disque import DisqueFeatureExtractor
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Run feature extractors and store results')
     parser.add_argument('--dataset', help='Path to dataset file for which to extract features', type=str)
+    parser.add_argument('--ckpt_path', help='Path to checkpoint (Optional - alternatively, provide using args file)', type=str, default=None)
     parser.add_argument('--fex_args', help='Path to Python file containing arguments to be passed to the feature extractor. Use fex_args to specify the model checkpoint.', type=str, default=None)
     parser.add_argument('--processes', help='Number of parallel processes', type=int, default=1)
     return parser
@@ -22,6 +23,8 @@ def main() -> None:
 
     fex_args = []
     fex_kwargs = {}
+    if args.ckpt_path is not None:
+        fex_kwargs['ckpt_path'] = args.ckpt_path
     if args.fex_args is not None:
         mod = import_python_file(args.fex_args)
         if hasattr(mod, 'args'):

@@ -11,6 +11,7 @@ def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='Code to extract features from video pair')
     parser.add_argument('--ref_video', help='Path to reference video', type=str)
     parser.add_argument('--dis_video', help='Path to distorted video', type=str)
+    parser.add_argument('--ckpt_path', help='Path to checkpoint (Optional - alternatively, provide using args file)', type=str, default=None)
     parser.add_argument('--fex_args', help='Path to Python file containing arguments to be passed to the feature extractor. Use fex_args to specify the model checkpoint.', type=str, default=None)
     parser.add_argument('--ref_standard', help='Standard to which the reference video conforms.', type=str)
     parser.add_argument('--dis_standard', help='Standard to which the distorted video conforms.', type=str)
@@ -35,6 +36,7 @@ def main():
     asset_dict['width'] = args.width
     asset_dict['height'] = args.height
     asset_dict['fps'] = args.framerate
+    asset_dict['ckpt_path'] = args.ckpt_path
 
     fex_args = []
     fex_kwargs = {}
